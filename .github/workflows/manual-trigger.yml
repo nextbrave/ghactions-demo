@@ -1,0 +1,22 @@
+name: Base workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'What is your name?'
+        required: true
+
+jobs:
+  foo:
+    name: Foo Job!
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Greetings
+        run: |
+          echo "hello world, ${{ github.event.inputs.name }}"
+
+
