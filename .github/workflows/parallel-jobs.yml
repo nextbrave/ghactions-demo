@@ -6,11 +6,12 @@ on:
 
 jobs:
   job-1:
+    name: Job 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
 
-      - name: Job 2
+      - name: Job 1
         run: |
           echo "Job 1 my beloved hobbits"
           slepp 10
