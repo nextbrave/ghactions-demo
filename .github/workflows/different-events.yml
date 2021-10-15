@@ -1,0 +1,32 @@
+name: Different events
+
+on:
+  push:
+    branches:
+      - different-events
+  pull_request:
+    branches:
+      - different-events
+
+jobs:
+  job-1:
+    name: Job 1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Step 1.1
+        run: |
+          echo "Job 1 my beloved hobbits"
+          sleep 10
+          echo "End of Job 1"
+
+  job-2:
+    name: Job 2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 2.1
+        run: |
+          echo "Job 2 my immortal elves"
+          sleep 9
+          echo "End of Job 2"
