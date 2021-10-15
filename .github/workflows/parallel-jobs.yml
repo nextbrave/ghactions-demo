@@ -1,0 +1,30 @@
+name: Parallel jobs example
+on:
+  workflow_run:
+    # The name of the workflow must be set here
+    workflows: ["Sequential jobs example"]
+    types:
+      - completed
+
+jobs:
+  job-1:
+    name: Job 1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Step 1.1
+        run: |
+          echo "Job 1 my beloved hobbits"
+          sleep 10
+          echo "End of Job 1"
+
+  job-2:
+    name: Job 2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 2.1
+        run: |
+          echo "Job 2 my immortal elves"
+          sleep 9
+          echo "End of Job 2"
