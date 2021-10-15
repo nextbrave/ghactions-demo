@@ -38,6 +38,9 @@ jobs:
           docker push 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:${{ env.IMAGE_TAG }}
           echo "::set-output name=docker_image::082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:${{ env.IMAGE_TAG }}"
 
+    outputs:
+      docker_image: ${{ steps.push-image.outputs.docker_image }}
+
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
@@ -65,7 +68,7 @@ jobs:
         with:
           task-definition: "${{ env.API_TASK_DEFINITION }}.json"
           container-name: nextbrave-api
-          image: ${{ steps.push-image.outputs.docker_image }}
+          image: ${{ needs.build.outputs.docker_image }}
 
       - name: Deploy ECS Service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
