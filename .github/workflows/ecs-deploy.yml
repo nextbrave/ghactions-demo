@@ -29,6 +29,4 @@ jobs:
         id: push-image
         run: |
           docker push 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:dev
-          docker push ${{ env.REPOSITORY_URI }}:${{ env.IMAGE_TAG }}
-          docker push ${{ env.REPOSITORY_URI }}:latest-${{ env.BRANCH_NAME }}
           echo "::set-output name=docker_image::082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:dev"
