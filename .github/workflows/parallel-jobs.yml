@@ -23,6 +23,6 @@ jobs:
     steps:
       - name: Step 2.1
         run: |
-          echo "Job 2 my dear elves"
+          echo "Job 2 my immortal elves"
           sleep 9
           echo "End of Job 2"
