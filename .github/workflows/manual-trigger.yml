@@ -1,6 +1,10 @@
 name: Base workflow
 
 on:
+  push:
+    branches:
+      - manual-triggers
+
   workflow_dispatch:
     inputs:
       name:
