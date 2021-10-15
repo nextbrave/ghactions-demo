@@ -68,7 +68,7 @@ jobs:
         with:
           task-definition: "${{ env.API_TASK_DEFINITION }}.json"
           container-name: nextbrave-api
-          image: docker_image::082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:${{ needs.build.outputs.image_tag }}
+          image: 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:${{ needs.build.outputs.image_tag }}
 
       - name: Deploy ECS Service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
