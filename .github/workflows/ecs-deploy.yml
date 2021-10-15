@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - step-ecs-deploy
+
+env:
+  ECS_CLUSTER: nextbrave-nonprod-ecs-cluster
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,3 +34,28 @@ jobs:
         run: |
           docker push 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:dev
           echo "::set-output name=docker_image::082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:dev"
+
+      - name: Deployment Configuration
+        run: |
+          API_TASK_DEFINITION="nextbrave-nonprod-dev-api"
+          aws ecs describe-task-definition \
+            --task-definition ${API_TASK_DEFINITION} \
+            --query 'taskDefinition' > ${API_TASK_DEFINITION}.json
+
+          echo "API_TASK_DEFINITION=${API_TASK_DEFINITION}" | tee -a $GITHUB_ENV
+          echo "API_ECS_SERVICE=nextbrave-nonprod-dev-api" | tee -a $GITHUB_ENV
+
+      - name: Update Task Definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: "${{ env.API_TASK_DEFINITION }}.json"
+          container-name: nextbrave-api
+          image: ${{ steps.push-image.outputs.docker_image }}
+
+      - name: Deploy ECS Service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.API_ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
