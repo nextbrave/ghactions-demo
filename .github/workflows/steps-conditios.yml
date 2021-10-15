@@ -1,0 +1,24 @@
+name: Steps Conditions
+
+on:
+  push:
+    branches:
+      - step-conditions
+      - step-conditions-test
+
+jobs:
+  some-funny-job:
+    name: Funny job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Run only if branch is "step-conditions"
+        if: github.ref == 'refs/heads/step-conditions'
+        run: |
+          echo "Hello right now I am in ${GITHUB_REF#refs/heads/} branch"
+
+      - name: Run only if branch is "step-conditions-test"
+        if: github.ref == 'refs/heads/step-conditions-test'
+        run: |
+          echo "This is another step only for branch ${GITHUB_REF#refs/heads/}"
