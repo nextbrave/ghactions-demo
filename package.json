@@ -1,0 +1,21 @@
+{
+  "name": "ghactions-demo",
+  "version": "1.0.0",
+  "description": "Github Actions examples!",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com.nb:nextbrave/ghactions-demo.git"
+  },
+  "author": "@donkeysharp",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.3"
+  }
+}
