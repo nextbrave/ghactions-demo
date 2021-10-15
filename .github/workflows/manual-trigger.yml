@@ -1,4 +1,4 @@
-name: Base workflow
+name: Manual Trigger
 
 on:
   push:
