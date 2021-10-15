@@ -14,7 +14,7 @@ jobs:
       - name: Job 1
         run: |
           echo "Job 1 my beloved hobbits"
-          slepp 10
+          sleep 10
           echo "End of Job 1"
 
   job-2:
@@ -23,5 +23,5 @@ jobs:
       - name: Job 2
         run: |
           echo "Job 2 my dear elves"
-          slepp 9
+          sleep 9
           echo "End of Job 2"
