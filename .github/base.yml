@@ -1,0 +1,14 @@
+name: Base workflow
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  foo:
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Greetings
+        run: |
+          echo "hello world"
