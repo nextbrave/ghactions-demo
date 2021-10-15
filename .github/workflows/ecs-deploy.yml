@@ -42,6 +42,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
+      - name: AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.DEPLOY_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.DEPLOY_SECRET_KEY }}
+          aws-region: us-west-2
+
       - name: Deployment Configuration
         run: |
           API_TASK_DEFINITION="nextbrave-nonprod-dev-api"
