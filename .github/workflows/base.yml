@@ -1,16 +1,8 @@
 name: Base workflow
-# on:
-#   push:
-#     branches:
-#       - master
-
-
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'What is your name?'
-        required: true
+  push:
+    branches:
+      - master
 
 jobs:
   foo:
@@ -22,6 +14,4 @@ jobs:
 
       - name: Greetings
         run: |
-          echo "hello world, ${{ github.event.inputs.name }}"
-
-
+          echo "hello world"
