@@ -1,0 +1,26 @@
+name: Parallel jobs example
+on:
+  push:
+    branches:
+      - parallel-jobs
+
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Job 2
+        run: |
+          echo "Job 1 my beloved hobbits"
+          slepp 10
+          echo "End of Job 1"
+
+  job-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job 2
+        run: |
+          echo "Job 2 my dear elves"
+          slepp 9
+          echo "End of Job 2"
