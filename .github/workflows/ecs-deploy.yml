@@ -26,14 +26,17 @@ jobs:
 
       - name: Build Docker Image
         run: |
+          export IMAGE_TAG=dev-${COMMIT_HASH}
           echo "Building Docker image"
-          docker build -t 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:dev .
+          docker build -t 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:${IMAGE_TAG} .
+
+          echo "IMAGE_TAG=${IMAGE_TAG}" | tee -a $GITHUB_ENV
 
       - name: Publish Docker Image
         id: push-image
         run: |
-          docker push 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:dev
-          echo "::set-output name=docker_image::082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:dev"
+          docker push 082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:${{ env.IMAGE_TAG }}
+          echo "::set-output name=docker_image::082982103746.dkr.ecr.us-west-2.amazonaws.com/ghactions-demo:${{ env.IMAGE_TAG }}"
 
       - name: Deployment Configuration
         run: |
