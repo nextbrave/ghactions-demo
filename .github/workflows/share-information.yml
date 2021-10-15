@@ -1,0 +1,31 @@
+name: Steps - Share information
+
+on:
+  push:
+    branches:
+      - step-share-info
+
+jobs:
+  share-info-between-steps:
+    name: Funny job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Wrong way to export a shared environment variable
+        run: |
+          export FOOBAR="some-important-value"
+
+      - name: Wrong way to use FOOBAR
+        run: |
+          echo "FOOBAR=${FOOBAR}"
+          echo "oops, it is empty"
+
+      - name: Correct way to export a shared environment variable
+        run: |
+          export FOOBAR="some-important-value"
+          echo "FOOBAR=${FOOBAR}" | tee -a $GITHUB_ENV
+
+      - name: Correct way to use FOOBAR
+        run: |
+          echo "FOOBAR=${{ env.FOOBAR }}"
